@@ -24,10 +24,22 @@ exports.config = {
         //'./test/specs/landing-page.js',
         //'./test/specs/submit-application-test.js'
         //'./test/specs/submit-application-e2e-test.js'
-        //'./test/specs/pages-validation-test-suite.js'
-        './test/specs/pages-validation-test-suite-improvements.js'
+        './test/specs/pages-validation-test-suite.js'
+        // './test/specs/pages-validation-test-suite-improvements.js'
 
     ],
+
+    suites: {
+        e2e: [
+            './test/specs/submit-application-e2e-test.js'
+            // npm run autotest:e2e
+        ],
+        validation: [
+            './test/specs/submit-application-test.js',
+            './test/specs/pages-validation-test-suite.js',
+            './test/specs/pages-validation-test-suite-improvements.js'
+        ],
+    },
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -73,7 +85,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'silent',
     //
     // Set specific log levels per logger
     // loggers:
@@ -137,6 +149,10 @@ exports.config = {
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
+    },
+    jasmineNodeOpts: {
+        ui: 'bdd',
+        defaultTimeoutInterval: 60000,
     },
     //
     // =====

@@ -9,6 +9,19 @@ const menuLinksText = [
 
 describe('demo.asteriag.com pages validation test suite', () => {
     browser.url('http://demo.asteriag.com');
+    // beforeAll(function() {
+    //     browser.url('http://demo.asteriag.com');
+    // });
+    // afterAll(function() {
+    //     console.log('Execution is completed');
+    // });
+    // beforeEach(function() {
+    //     console.log('beforeEach message');
+    // });
+    // afterEach(function() {
+    //     console.log('afterEach message');
+    // });
+    
     it('Landing page validation', () => {
         browser.navigateTo('http://demo.asteriag.com');
         const title = browser.getTitle();

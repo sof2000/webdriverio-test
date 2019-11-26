@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "autotest": "./node_modules/.bin/wdio wdio.conf.js"
+    "autotest": "./node_modules/.bin/wdio wdio.conf.js",
+    "autotest:e2e": "./node_modules/.bin/wdio wdio.conf.js --suite e2e",
+    "autotest:validation": "./node_modules/.bin/wdio wdio.conf.js --suite validation"
+
   },
   "keywords": [],
   "author": "",

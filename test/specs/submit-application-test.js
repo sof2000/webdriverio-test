@@ -10,7 +10,7 @@ const menuLinksText = [
 describe('demo.asteriag.com submit application with Elements validation test', () => {
     browser.url('http://demo.asteriag.com');
     it('landing page validation', () => {
-        
+        browser.debug();
         const title = browser.getTitle();
         expect(title).toBe('Asteria Bank – We Test For Better Software');
         //Image validation
