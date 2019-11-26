@@ -21,8 +21,12 @@ exports.config = {
     //
     specs: [
         //'./test/specs/**/*.js'
-        //'./test/specs/landing-page.js'
-        './test/specs/submit-application-test.js'
+        //'./test/specs/landing-page.js',
+        //'./test/specs/submit-application-test.js'
+        //'./test/specs/submit-application-e2e-test.js'
+        //'./test/specs/pages-validation-test-suite.js'
+        './test/specs/pages-validation-test-suite-improvements.js'
+
     ],
     // Patterns to exclude.
     exclude: [

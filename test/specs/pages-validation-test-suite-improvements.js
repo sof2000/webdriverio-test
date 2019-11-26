@@ -7,10 +7,26 @@ const menuLinksText = [
     "Enroll"
 ]
 
-describe('demo.asteriag.com submit application with Elements validation test', () => {
+function validateTextElement(selector, expectedValue) {
+    // const pageElement = $(selector);
+    // const expectedText = expectedValue;
+    // const actualText = pageElement.getText();
+    // expect(expectedText).toMatch(actualText);
+    expect($(selector).getText()).toMatch(expectedValue);
+}
+
+function validatePlaceholderText(selector, expectedValue) {
+    // const pageElement = $(selector);
+    // const expectedText = expectedValue;
+    // const actualText = pageElement.getAttribute('placeholder');
+    // expect(expectedText).toMatch(actualText);
+    expect($(selector).getAttribute('placeholder')).toMatch(expectedValue);
+}
+
+describe('demo.asteriag.com pages validation test suite', () => {
     browser.url('http://demo.asteriag.com');
-    it('landing page validation', () => {
-        
+    it('Landing page validation', () => {
+        browser.navigateTo('http://demo.asteriag.com');
         const title = browser.getTitle();
         expect(title).toBe('Asteria Bank – We Test For Better Software');
         //Image validation
@@ -28,21 +44,16 @@ describe('demo.asteriag.com submit application with Elements validation test', (
         });
 
     });
-    it('Click Accounts Link Text', () => {
-        const accountsElement = $('.menu-main-menu-container>ul>li:nth-child(1)>a');
-        expect(accountsElement.isClickable()).toBe(true);
-        accountsElement.click();
-    });
 
     it('Validation Accounts page', () => {
-        // Element may have dynamic ID id=post-37
+        browser.navigateTo('http://demo.asteriag.com/accounts');
         //validate page title
-        const pageTitleElement = $("h1[class='entry-title']");
-        const expectedTitle = 'ACCOUNTS';
-        const actualTitle = pageTitleElement.getText();
-        //expect(pageTitleElement.getText()).toMatch('Accounts');
-        //expect(pageTitleElement.getText()).toMatch('ACCOUNTS');
-        expect(expectedTitle).toMatch(actualTitle);
+        // const pageTitleElement = $("h1[class='entry-title']");
+        // const expectedTitle = 'ACCOUNTS';
+        // const actualTitle = pageTitleElement.getText();
+        // expect(expectedTitle).toMatch(actualTitle);
+        validateTextElement("h1[class='entry-title']", 'ACCOUNTS');
+
         //validate input field label
         const fieldLabelElement = $('article>div>p:nth-child(1)');
         const expectedFieldLabelText = "Please, Enter your Zip Code:";
@@ -51,10 +62,14 @@ describe('demo.asteriag.com submit application with Elements validation test', (
         //validate input field
         const inputFieldElement = $('#zipcode1');
         expect(inputFieldElement.isExisting()).toBe(true);
+
         //validate place holder
-        const expectedInputFieldPlaceholderText = 'Zip Code';
-        const actualInputFieldPlaceholderText = inputFieldElement.getAttribute('placeholder');
-        expect(actualInputFieldPlaceholderText).toBe(expectedInputFieldPlaceholderText);
+        // const expectedInputFieldPlaceholderText = 'Zip Code';
+        // const actualInputFieldPlaceholderText = inputFieldElement.getAttribute('placeholder');
+        // expect(actualInputFieldPlaceholderText).toBe(expectedInputFieldPlaceholderText);
+        validatePlaceholderText(inputFieldElement, 'Zip Code');
+
+
         //validate go button
         const goButtonElement = $('#gozip');
         expect(goButtonElement.isClickable()).toBe(true);
@@ -63,16 +78,10 @@ describe('demo.asteriag.com submit application with Elements validation test', (
         const actualGoButtonText = goButtonElement.getText();
         expect(actualGoButtonText).toMatch(expectedGoButtonText);
     });
-    it('Set zip code and click GO button', () => {
-        const inputFieldElement = $('#zipcode1');
-        const goButtonElement = $('#gozip');
-         //Set zip code
-         inputFieldElement.setValue('80111');
-         goButtonElement.click();
-    });
 
     
     it('Validate Choose Account Type Page', () => {
+        browser.navigateTo('http://demo.asteriag.com/choose-account-type');
         //validate page title
         const pageTitleElement = $("h1[class='entry-title']");
         const expectedTitle = 'CHOOSE ACCOUNT TYPE';
@@ -111,14 +120,9 @@ describe('demo.asteriag.com submit application with Elements validation test', (
         expect(expectedOpenAccountText).toMatch(actualOpenAccountText);
     });
 
-    it('Check account type and click Open Account button', () => {
-        const checkingAndSavingsAccountCheckboxElement = $('#checkingsavings');
-        const openAccountElement = $('#openaccount');
-        checkingAndSavingsAccountCheckboxElement.click();
-        openAccountElement.click();
-    });
 
     it('Validate Before you Apply Page', () => {
+        browser.navigateTo('http://demo.asteriag.com/before-you-apply');
         //validate page title
         const pageTitleElement = $("h1[class='entry-title']");
         const expectedTitle = 'BEFORE YOU APPLY';
@@ -154,14 +158,9 @@ describe('demo.asteriag.com submit application with Elements validation test', (
         expect(expectedGoToApplicationText).toMatch(actualGoToApplicationText);
     });
 
-    it('Check option and click Go To Application button', () => {
-        const noCheckboxElement = $('#savingplusno');
-        const goToApplicationElement = $('#gotoapplication');
-        noCheckboxElement.click();
-        goToApplicationElement.click();
-    });
 
     it('Validate Application Page', () => {
+        browser.navigateTo('http://demo.asteriag.com/application');
         //validate page title
         const pageTitleElement = $("h1[class='entry-title']");
         const expectedTitle = 'APPLICATION';
@@ -228,48 +227,9 @@ describe('demo.asteriag.com submit application with Elements validation test', (
         const continueElement = $('#continueapplication');
         expect(continueElement.isExisting()).toBe(true);
     });
-    it('Set values and click Continue button', () => {
-        const firstNameElement = $('#firstname');
-        firstNameElement.setValue('First Name')
-        const lastNameElement = $('#lastname');
-        lastNameElement.setValue('Last Name')
-        const address1Element = $('#address1');
-        address1Element.setValue('Address street')
-        const address2Element = $('#address2');
-        address2Element.setValue('Address avenue')
-        const cityElement = $('#city');
-        cityElement.setValue('Denver')
-        const stateOption2Element = $('#state>option:nth-child(2)');
-        stateOption2Element.click();
-        const zipCodeElement = $('#zipcode2');
-        zipCodeElement.setValue('80111')
-        const emailElement = $('#email');
-        emailElement.setValue('test@mail.com');
-        const reemailElement = $('#reemail');
-        reemailElement.setValue('test@mail.com')
-        const phoneElement = $('#phone');
-        phoneElement.setValue('5555555');
-        const phoneTypeOptionCellElement = $('option=Cell');
-        phoneTypeOptionCellElement.click();
-        const citizenYesElement = $('#citizenyes');
-        citizenYesElement.click();;
-        const dualCitizenNoElement = $('#citizendualno');
-        dualCitizenNoElement.click();
-        //validate phone field
-        const countryOptionUSAElement = $('option=USA');
-        countryOptionUSAElement.click();
-        //validate Date of Birth field
-        const dateOfBirthElement = $('#dateofbirth');
-        dateOfBirthElement.setValue('10/05/1980');
-        //validate Finances field
-        const financesOptionEmploymentElement = $('option=Employment');
-        financesOptionEmploymentElement.click();
-        //validate Go to Application button
-        const continueElement = $('#continueapplication');
-        continueElement.click();
-    });
 
     it('Validation ACCOUNT SETUP page', () => {
+        browser.navigateTo('http://demo.asteriag.com/account-setup');
         //validate page title
         const pageTitleElement = $("h1[class='entry-title']");
         const expectedTitle = 'ACCOUNT SETUP';
@@ -295,14 +255,9 @@ describe('demo.asteriag.com submit application with Elements validation test', (
         const actualSubmitButtonText = submitButtonElement.getText();
         expect(actualSubmitButtonText).toMatch(expectedSubmitButtonText);
     });
-    it('Set SSN code and click Submit button', () => {
-        const inputFieldElement = $('#ssn');
-        const submitButtonElement = $('#submit');
-         //Set zip code
-         inputFieldElement.setValue('45548888');
-         submitButtonElement.click();
-    });
+
     it('Validation CONFIRMATION page', () => {
+        browser.navigateTo('http://demo.asteriag.com/confirmation');
         //validate page title
         const pageTitleElement = $("h1[class='entry-title']");
         const expectedTitle = 'CONFIRMATION';
